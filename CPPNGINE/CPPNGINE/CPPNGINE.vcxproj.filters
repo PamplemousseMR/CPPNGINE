@@ -25,6 +25,12 @@
     <Filter Include="Fichiers sources\InitializationLists">
       <UniqueIdentifier>{18a8feeb-ffe7-4ddf-9e59-cad5ee7c0411}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\Ref">
+      <UniqueIdentifier>{666c0825-48c0-4000-9e94-0efb9e2581e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Ref">
+      <UniqueIdentifier>{f38f2777-811b-4c38-a0c6-3d7dc27a560e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -39,6 +45,9 @@
     <ClCompile Include="InitializationLists.cpp">
       <Filter>Fichiers sources\InitializationLists</Filter>
     </ClCompile>
+    <ClCompile Include="Ref.hxx">
+      <Filter>Fichiers sources\Ref</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Slot.h">
@@ -49,6 +58,9 @@
     </ClInclude>
     <ClInclude Include="InitializationLists.h">
       <Filter>Fichiers d%27en-tête\InitializationLists</Filter>
+    </ClInclude>
+    <ClInclude Include="Ref.h">
+      <Filter>Fichiers d%27en-tête\Ref</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

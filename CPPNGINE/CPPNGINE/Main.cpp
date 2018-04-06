@@ -1,19 +1,21 @@
 #include "Slot.hxx"
 #include "Signal.hxx"
 #include "InitializationLists.h"
+#include "Ref.hxx"
 
-int slotTest(float _f, double _d)
+int slotTest(float& _f, double _d)
 {
 	return _f + _d;
 }
 
 int main()
 {
-	Slot<int(float, double)> slot(slotTest);
-	Signal<int(float, double)> sig;
+	Slot<int(float&, double)> slot(slotTest);
+	Signal<int(float&, double)> sig;
 
 	sig.connect(slot);
-	sig.emit(1.f, 2.);
+	float ref = 1.f;
+	sig.emit(Ref<float>(ref), 2.);
 
 	InitializationLists in1(1);
 	if (in1.isList())
