@@ -13,18 +13,30 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers sources\Variadique">
+      <UniqueIdentifier>{17eb3ae1-9226-407f-880e-47ef1111e0b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Variadique">
+      <UniqueIdentifier>{5e3d11a1-2f4e-49b2-8724-1042e66de321}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Variadique.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Variadique.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Slot.hxx">
+      <Filter>Fichiers sources\Variadique</Filter>
+    </ClCompile>
+    <ClCompile Include="Signal.hxx">
+      <Filter>Fichiers sources\Variadique</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Slot.h">
+      <Filter>Fichiers d%27en-tête\Variadique</Filter>
+    </ClInclude>
+    <ClInclude Include="Signal.h">
+      <Filter>Fichiers d%27en-tête\Variadique</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
