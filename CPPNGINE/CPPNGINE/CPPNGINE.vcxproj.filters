@@ -19,6 +19,12 @@
     <Filter Include="Fichiers d%27en-tête\Variadique">
       <UniqueIdentifier>{5e3d11a1-2f4e-49b2-8724-1042e66de321}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\InitializationLists">
+      <UniqueIdentifier>{d9318fb6-91ab-4d93-8ccf-532cec601dc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\InitializationLists">
+      <UniqueIdentifier>{18a8feeb-ffe7-4ddf-9e59-cad5ee7c0411}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -30,6 +36,9 @@
     <ClCompile Include="Signal.hxx">
       <Filter>Fichiers sources\Variadique</Filter>
     </ClCompile>
+    <ClCompile Include="InitializationLists.cpp">
+      <Filter>Fichiers sources\InitializationLists</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Slot.h">
@@ -37,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="Signal.h">
       <Filter>Fichiers d%27en-tête\Variadique</Filter>
+    </ClInclude>
+    <ClInclude Include="InitializationLists.h">
+      <Filter>Fichiers d%27en-tête\InitializationLists</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

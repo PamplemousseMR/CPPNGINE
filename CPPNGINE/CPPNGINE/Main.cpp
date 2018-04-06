@@ -1,5 +1,6 @@
 #include "Slot.hxx"
 #include "Signal.hxx"
+#include "InitializationLists.h"
 
 int slotTest(float _f, double _d)
 {
@@ -13,6 +14,17 @@ int main()
 
 	sig.connect(slot);
 	sig.emit(1.f, 2.);
+
+	InitializationLists in1(1);
+	if (in1.isList())
+	{
+		return -1;
+	}
+	InitializationLists in2{ 1, 2, 3 };
+	if (!in2.isList())
+	{
+		return -2;
+	}
 
 	return 0;
 }
