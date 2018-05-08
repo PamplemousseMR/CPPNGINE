@@ -2,6 +2,8 @@
 #include "Signal.hxx"
 #include "InitializationLists.h"
 #include "Ref.hxx"
+#include "Generic.hxx"
+#include "xintrin.h"
 
 int slotTest(float& _f, double _d)
 {
@@ -27,6 +29,8 @@ int main()
 	{
 		return -2;
 	}
+
+	xintrin();
 
 	return 0;
 }
