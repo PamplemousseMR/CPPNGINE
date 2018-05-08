@@ -60,7 +60,7 @@
     <ClCompile Include="Ref.hxx">
       <Filter>Fichiers sources\Ref</Filter>
     </ClCompile>
-    <ClCompile Include="xintrin.cpp">
+    <ClCompile Include="simd.cpp">
       <Filter>Fichiers sources\SIMD</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,10 +83,7 @@
     <ClInclude Include="Generic.hxx">
       <Filter>Fichiers sources\Generic</Filter>
     </ClInclude>
-    <ClInclude Include="commun.h">
-      <Filter>Fichiers d%27en-tête\SIMD</Filter>
-    </ClInclude>
-    <ClInclude Include="xintrin.h">
+    <ClInclude Include="simd.h">
       <Filter>Fichiers d%27en-tête\SIMD</Filter>
     </ClInclude>
   </ItemGroup>

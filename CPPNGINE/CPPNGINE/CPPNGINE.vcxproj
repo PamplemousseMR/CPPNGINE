@@ -120,17 +120,16 @@
     <ClCompile Include="Ref.hxx" />
     <ClCompile Include="Signal.hxx" />
     <ClCompile Include="Slot.hxx" />
-    <ClCompile Include="xintrin.cpp" />
+    <ClCompile Include="simd.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="commun.h" />
     <ClInclude Include="Generic.h" />
     <ClInclude Include="Generic.hxx" />
     <ClInclude Include="InitializationLists.h" />
     <ClInclude Include="Ref.h" />
     <ClInclude Include="Signal.h" />
     <ClInclude Include="Slot.h" />
-    <ClInclude Include="xintrin.h" />
+    <ClInclude Include="simd.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

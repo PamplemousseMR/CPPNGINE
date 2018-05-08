@@ -3,7 +3,7 @@
 #include "InitializationLists.h"
 #include "Ref.hxx"
 #include "Generic.hxx"
-#include "xintrin.h"
+#include "simd.h"
 
 int slotTest(float& _f, double _d)
 {
@@ -30,7 +30,11 @@ int main()
 		return -2;
 	}
 
-	xintrin();
+	xmmintrin();
+
+	print<float>(1.2);
+
+	getchar();
 
 	return 0;
 }

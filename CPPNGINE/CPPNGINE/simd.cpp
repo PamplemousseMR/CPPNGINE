@@ -1,34 +1,16 @@
-#include "xintrin.h"
-#include "commun.h"
+#include "simd.h"
 #include <xmmintrin.h>
 
-/*
-<mmintrin.h>  MMX       Introduce eight 64 bit registers (MM0-MM7) and instructions to work with eight signed/unsigned bytes, four signed/unsigned words, two signed/unsigned dwords.
-<xmmintrin.h> SSE       Introduce eight/sixteen 128 bit registers (XMM0-XMM7/15) and instruction to work with four single precision floating point operands. Add integer operations on MMX registers too. (The MMX-integer part of SSE is sometimes called MMXEXT, and was implemented on a few non-Intel CPUs without xmm registers and the floating point part of SSE.)
-<emmintrin.h> SSE2      Introduces instruction to work with 2 double precision floating point operands, and with packed byte/word/dword/qword integers in 128-bit xmm registers.
-<pmmintrin.h> SSE3      Add a few varied instructions (mostly floating point), including a special kind of unaligned load (lddqu) that was better on Pentium 4, synchronization instruction, horizontal add/sub.
-<tmmintrin.h> SSSE3     Again a varied set of instructions, mostly integer. The first shuffle that takes its control operand from a register instead of hard-coded (pshufb). More horizontal processing, shuffle, packing/unpacking, mul+add on bytes, and some specialized integer add/mul stuff.
-<smmintrin.h> SSE4.1    Add a lot of instructions: Filling in a lot of the gaps by providing min and max and other operations for all integer data types (especially 32-bit integer had been lacking), where previously integer min was only available for unsigned bytes and signed 16-bit. Also scaling, FP rounding, blending, linear algebra operation, text processing, comparisons. Also a non temporal load for reading video memory, or copying it back to main memory. (Previously only NT stores were available.)
-<nmmintrin.h> SSE4.2    Add a lot of instructions: Filling in a lot of the gaps by providing min and max and other operations for all integer data types (especially 32-bit integer had been lacking), where previously integer min was only available for unsigned bytes and signed 16-bit. Also scaling, FP rounding, blending, linear algebra operation, text processing, comparisons. Also a non temporal load for reading video memory, or copying it back to main memory. (Previously only NT stores were available.)
-<ammintrin.h> SSE4A     Add extension for AMD
-<wmmintrin.h> AES       Add support for accelerating AES symmetric encryption/decryption.
-<immintrin.h> AVX       Add eight/sixteen 256 bit registers (YMM0-YMM7/15). Support all previous floating point datatype. Three operand instructions.
-<immintrin.h> FMA       Add Fused Multiply Add and correlated instructions.
-<immintrin.h> AVX2      Add support for integer data types.
-<zmmintrin.h> AVX512    Add eight/thirty-two 512 bit registers (ZMM0-ZMM7/31) and eight 64-bit mask register (k0-k7). Promote most previous instruction to 512 bit wide. Optional parts of AVX512 add instruction for exponentials & reciprocals (AVX512ER), scatter/gather prefetching (AVX512PF), scatter conflict detection (AVX512CD), compress, expand.
-https://software.intel.com/sites/landingpage/IntrinsicsGuide
-*/
-
-/*  xmmintrin x64
+/*  xmmintrin
+SSE
 Introduce eight/sixteen 128 bit registers (XMM0-XMM7/15) and instruction to work with four single precision floating point operands.
 Add integer operations on MMX registers too.
 The MMX-integer part of SSE is sometimes called MMXEXT, and was implemented on a few non-Intel CPUs without xmm registers and the floating point part of SSE.
 */
-void xintrin()
+void xmmintrin()
 {
-
-	float aligned arrFloat4[4];
-	char aligned arrChar4[4];
+	float aligned32 arrFloat4[4];
+	char aligned32 arrChar4[4];
 	__m128 m128a, m128b;
 	__m64 m64;
 	const float cf = 10.5f;
@@ -36,7 +18,6 @@ void xintrin()
 	float flo = 10.5f;
 	int in = 10;
 	unsigned ui = 10;
-	//long long i64;
 	__int64 i64;
 
 	/*
@@ -184,7 +165,7 @@ void xintrin()
 	m64 = _mm_cvt_ps2pi(m128a);
 	m64 = _mm_cvtt_ps2pi(m128a);
 	m128a = _mm_cvt_pi2ps(m128a, m64);
-	
+
 	/*
 	* Integer (MMX) extensions
 	*/
@@ -210,33 +191,33 @@ void xintrin()
 	/*
 	* Alternate intrinsic names definition
 	*/
-	/*_mm_cvtps_pi32    _mm_cvt_ps2pi
-	_mm_cvttps_pi32   _mm_cvtt_ps2pi
-	_mm_cvtpi32_ps    _mm_cvt_pi2ps
-	_mm_extract_pi16  _m_pextrw
-	_mm_insert_pi16   _m_pinsrw
-	_mm_max_pi16      _m_pmaxsw
-	_mm_max_pu8       _m_pmaxub
-	_mm_min_pi16      _m_pminsw
-	_mm_min_pu8       _m_pminub
-	_mm_movemask_pi8  _m_pmovmskb
-	_mm_mulhi_pu16    _m_pmulhuw
-	_mm_shuffle_pi16  _m_pshufw
-	_mm_maskmove_si64 _m_maskmovq
-	_mm_avg_pu8       _m_pavgb
-	_mm_avg_pu16      _m_pavgw
-	_mm_sad_pu8       _m_psadbw*/
+	m64 = _mm_cvtps_pi32(m128a);
+	m64 = _mm_cvttps_pi32(m128a);
+	m128a = _mm_cvtpi32_ps(m128a, m64);
+	in = _mm_extract_pi16(m64, 0);									// r := (n==0) ? a0 : ( (n==1) ? a1 : ( (n==2) ? a2 : a3 ) )
+	m64 = _mm_insert_pi16(m64, in, 0);								// r0 := (n==0) ? d : a0, r1: = (n == 1) ? d : a1, r2: = (n == 2) ? d : a2, r3: = (n == 3) ? d : a3;
+	m64 = _mm_max_pi16(m64, m64);									// r0 = max(a0, b0), r1 =  max(a1, b1), r2 =  max(a2, b2), r3 =  max(a3, b3)
+	m64 = _mm_max_pu8(m64, m64);									// r0 = max(a0, b0), r1 =  max(a1, b1), r2 =  max(a2, b2), ..., r7 =  max(a7, b7)
+	m64 = _mm_min_pi16(m64, m64);									// r0 = min(a0, b0), r1 =  min(a1, b1), r2 =  min(a2, b2), r3 =  min(a3, b3)
+	m64 = _mm_min_pu8(m64, m64);									// r0 = min(a0, b0), r1 =  min(a1, b1), r2 =  min(a2, b2), ..., r7 =  min(a7, b7)
+	in = _mm_movemask_pi8(m64);										// r := sign(a7)<<7 | sign(a6)<<6 |... | sign(a0)
+	m64 = _mm_mulhi_pu16(m64, m64);									// r0 := hiword(a0 * b0), r1: = hiword(a1 * b1), r2 : = hiword(a2 * b2), r3 : = hiword(a3 * b3)
+	m64 = _mm_shuffle_pi16(m64, 0);									// r0 := word (n&0x3) of a, r1: = word((n >> 2) & 0x3) of a, r2 : = word((n >> 4) & 0x3) of a, r3 : = word((n >> 6) & 0x3) of a
+	_mm_maskmove_si64(m64, m64, arrChar4);							// if (sign(n0)) p[0] := d0 , if (sign(n1)) p[1] : = d1, ..., , if (sign(n7)) p[7] : = d7
+	m64 = _mm_avg_pu8(m64, m64);									// t = (unsigned short)a0 + (unsigned short)b0, r0 = (t >> 1) | (t & 0x01), ..., t = (unsigned short)a7 + (unsigned short)b7, r7 = (unsigned char)((t >> 1) | (t & 0x01))
+	m64 = _mm_avg_pu16(m64, m64);									// t = (unsigned int)a0 + (unsigned int)b0, r0 = (t >> 1) | (t & 0x01), ..., t = (unsigned word)a7 + (unsigned word)b7, r7 = (unsigned short)((t >> 1) | (t & 0x01))
+	m64 = _mm_sad_pu8(m64, m64);									// r0 = abs(a0 - b0) + ... + abs(a7 - b7), r1 = r2 = r3 = 0
 
 	/*
 	* Utility intrinsics function
 	*/
-	/*__m128 _mm_cvtpi16_ps(__m64 _A)
-	__m128 _mm_cvtpu16_ps(__m64 _A)
-	__m64 _mm_cvtps_pi16(__m128 _A)
-	__m128 _mm_cvtpi8_ps(__m64 _A)
-	__m128 _mm_cvtpu8_ps(__m64 _A)
-	__m64 _mm_cvtps_pi8(__m128 _A)
-	__m128 _mm_cvtpi32x2_ps(__m64 _A, __m64 _B)*/
+	m128a = _mm_cvtpi16_ps(m64);
+	m128a = _mm_cvtpu16_ps(m64);
+	m64 = _mm_cvtps_pi16(m128a);
+	m128a = _mm_cvtpi8_ps(m64);
+	m128a = _mm_cvtpu8_ps(m64);
+	m64 = _mm_cvtps_pi8(m128a);
+	m128a = _mm_cvtpi32x2_ps(m64, m64);
 #endif
 }
 
