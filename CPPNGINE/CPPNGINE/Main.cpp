@@ -1,38 +1,30 @@
-#include "Slot.hxx"
-#include "Signal.hxx"
 #include "InitializationLists.h"
-#include "Ref.hxx"
-#include "Generic.hxx"
-#include "simd.h"
+/*#include "CastOperator.h"
+#include "CastOperator.hxx"*/
+#include "Simd.h"
+#include "VariadiqueTemplate.h"
+#include "VariadiqueTemplate.hxx"
 
-int slotTest(float& _f, double _d)
+#include "Generic.hxx"
+#include <iostream>
+
+double f(int _i, float _f)
 {
-	return _f + _d;
+	return _i + _f;
 }
 
 int main()
 {
-	Slot<int(float&, double)> slot(slotTest);
-	Signal<int(float&, double)> sig;
+	InitializationListsTest();
+	//CastOperatorTest();
+	SimdTest();
+	//VariadiqueTemplateTest();
 
-	sig.connect(slot);
-	float ref = 1.f;
-	sig.emit(Ref<float>(ref), 2.);
+	std::cout << "--- VariadiqueTemplateTest ---" << std::endl;
+	VariadiqueTemplate<double(int, float)> t(f);
+	std::cout << "main " << t(1, 3.f) << std::endl;
 
-	InitializationLists in1(1);
-	if (in1.isList())
-	{
-		return -1;
-	}
-	InitializationLists in2{ 1, 2, 3 };
-	if (!in2.isList())
-	{
-		return -2;
-	}
-
-	xmmintrin();
-
-	print<float>(1.2);
+	print<float>(1.2f);
 
 	getchar();
 

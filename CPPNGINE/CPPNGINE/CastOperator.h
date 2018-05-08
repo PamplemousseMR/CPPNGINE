@@ -1,12 +1,12 @@
 #pragma once
 
-template< typename T >
-class Ref
+template<class T>
+class CastOperator
 {
 
 public:
 
-	Ref(T& _ref);
+	CastOperator(T&);
 
 	operator T&() const;
 	operator const T&() const;
@@ -16,4 +16,3 @@ private:
 	T* m_ref;
 
 };
-

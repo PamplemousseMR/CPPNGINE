@@ -23,4 +23,7 @@ https://software.intel.com/sites/landingpage/IntrinsicsGuide
 #define aligned32 _declspec(align(16))
 #endif
 
+void mmintrin();
 void xmmintrin();
+
+void SimdTest();

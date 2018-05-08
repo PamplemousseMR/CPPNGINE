@@ -19,3 +19,16 @@ bool InitializationLists::isList() const
 {
 	return m_isList;
 }
+
+void InitializationListsTest()
+{
+	std::cout << "--- InitializationListsTest ---" << std::endl;
+	{
+		InitializationLists in(1);
+		std::cout << "InitializationLists : () => " << std::boolalpha << in.isList() << std::endl;
+	}
+	{
+		InitializationLists in{ 1, 2, 3 };
+		std::cout << "InitializationLists : {} => " << std::boolalpha << in.isList() << std::endl;
+	}
+}

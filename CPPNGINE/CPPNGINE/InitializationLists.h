@@ -3,6 +3,7 @@
 #include <vector>
 #include <initializer_list>
 
+// std::initializer_list
 class InitializationLists
 {
 
@@ -21,3 +22,4 @@ private:
 
 };
 
+void InitializationListsTest();

@@ -1,4 +1,4 @@
-#include "simd.h"
+#include "Simd.h"
 #include <xmmintrin.h>
 
 /*  xmmintrin
