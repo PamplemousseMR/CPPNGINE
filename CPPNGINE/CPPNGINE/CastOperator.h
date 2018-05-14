@@ -1,18 +1,31 @@
 #pragma once
 
-template<class T>
-class CastOperator
+#include "Commun.h"
+
+#include <string>
+
+/*
+	this class test std::ref
+
+	cast operator
+*/
+class CastOperator : Commun
 {
 
 public:
 
-	CastOperator(T&);
+	static void launchTest();
 
-	operator T&() const;
-	operator const T&() const;
+public:
+
+	explicit operator int() const;
 
 private:
 
-	T* m_ref;
+	CastOperator(const std::string&);
+
+private:
+
+	std::string m_str;
 
 };

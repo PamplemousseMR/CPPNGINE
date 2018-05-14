@@ -1,19 +1,21 @@
 #include "CastOperator.h"
 
-template<class T>
-CastOperator<T>::CastOperator(T& _ref)
-	:	m_ref(&_ref)
+#include <iostream>
+
+void CastOperator::launchTest()
+{
+	Commun::test(typeid(CastOperator).name());
+	CastOperator co("test");
+	int size = co.operator int();
+	std::cout << "size => " << size << std::endl;
+}
+
+CastOperator::CastOperator(const std::string& _str)
+	:	m_str(_str)
 {
 }
 
-template< typename T >
-CastOperator<T>::operator T&() const
+CastOperator::operator int() const
 {
-	return *m_ref;
-}
-
-template< typename T >
-CastOperator<T>::operator const T&() const
-{
-	return *m_ref;
+	return m_str.size();
 }

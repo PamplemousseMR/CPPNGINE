@@ -60,14 +60,14 @@
     <ClCompile Include="VariadiqueTemplate.hxx">
       <Filter>Fichiers sources\VariadiqueTemplate</Filter>
     </ClCompile>
-    <ClCompile Include="VariadiqueTemplate.cpp">
-      <Filter>Fichiers sources\VariadiqueTemplate</Filter>
-    </ClCompile>
     <ClCompile Include="Simd.cpp">
       <Filter>Fichiers sources\SIMD</Filter>
     </ClCompile>
     <ClCompile Include="CastOperator.h">
       <Filter>Fichiers d%27en-tête\CastOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="Commun.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="CastOperator.hxx">
       <Filter>Fichiers sources\CastOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="Commun.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,6 +2,19 @@
 
 #include <iostream>
 
+void InitializationLists::launchTest()
+{
+	Commun::test(typeid(InitializationLists).name());
+	{
+		InitializationLists in(1);
+		std::cout << "InitializationLists : () => " << std::boolalpha << in.isList() << std::endl;
+	}
+	{
+		InitializationLists in{ 1, 2, 3 };
+		std::cout << "InitializationLists : {} => " << std::boolalpha << in.isList() << std::endl;
+	}
+}
+
 InitializationLists::InitializationLists(int _i)
 	:	m_size(1),
 		m_list(_i)
@@ -18,17 +31,4 @@ InitializationLists::InitializationLists(std::initializer_list<int> _list)
 bool InitializationLists::isList() const
 {
 	return m_isList;
-}
-
-void InitializationListsTest()
-{
-	std::cout << "--- InitializationListsTest ---" << std::endl;
-	{
-		InitializationLists in(1);
-		std::cout << "InitializationLists : () => " << std::boolalpha << in.isList() << std::endl;
-	}
-	{
-		InitializationLists in{ 1, 2, 3 };
-		std::cout << "InitializationLists : {} => " << std::boolalpha << in.isList() << std::endl;
-	}
 }

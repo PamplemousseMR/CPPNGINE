@@ -7,7 +7,7 @@ Introduce eight/sixteen 128 bit registers (XMM0-XMM7/15) and instruction to work
 Add integer operations on MMX registers too.
 The MMX-integer part of SSE is sometimes called MMXEXT, and was implemented on a few non-Intel CPUs without xmm registers and the floating point part of SSE.
 */
-void xmmintrin()
+void Simd::xmmintrin()
 {
 	float aligned32 arrFloat4[4];
 	char aligned32 arrChar4[4];
@@ -18,7 +18,6 @@ void xmmintrin()
 	float flo = 10.5f;
 	int in = 10;
 	unsigned ui = 10;
-	__int64 i64;
 
 	/*
 	* memory & initialization

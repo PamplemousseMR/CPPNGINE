@@ -2,9 +2,11 @@
 
 #include <iostream>
 
-void SimdTest()
+
+void Simd::launchTest()
 {
-	std::cout << "--- SimdTest ---" << std::endl;
-	mmintrin();
-	xmmintrin();
+	Commun::test(typeid(Simd).name());
+	Simd simd;
+	simd.mmintrin();
+	simd.xmmintrin();
 }

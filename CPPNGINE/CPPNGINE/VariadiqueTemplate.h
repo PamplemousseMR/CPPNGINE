@@ -1,13 +1,22 @@
 #pragma once
 
-#include <vector>
+#include "Commun.h"
 
+/*
+	this class test variadiques templates
+
+	test with function pointer
+*/
 template<class F>
 class VariadiqueTemplate;
 
 template< class F, class... A >
-class VariadiqueTemplate< F(A...) >
+class VariadiqueTemplate< F(A...) > : Commun
 {
+
+public:
+
+	static void launchTest();
 
 public:
 
@@ -20,5 +29,3 @@ private:
 	F(*m_fun)(A...);
 
 };
-
-//void VariadiqueTemplateTest();

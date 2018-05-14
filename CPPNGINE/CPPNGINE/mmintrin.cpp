@@ -5,7 +5,7 @@
 MMX
 Introduce eight 64 bit registers(MM0 - MM7) and instructions to work with eight signed / unsigned bytes, four signed / unsigned words, two signed / unsigned dwords.
 */
-void mmintrin()
+void Simd::mmintrin()
 {
 	__m64 m64;
 	int in = 10;
