@@ -1,8 +1,5 @@
 #pragma once
 
-/*
-    this class test explicit
-*/
 class NotExplicit
 {
 

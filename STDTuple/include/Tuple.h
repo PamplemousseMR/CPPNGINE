@@ -2,9 +2,6 @@
 
 #include <ostream>
 
-/*
-    this class test std::tuple
-*/
 template<typename... T>
 class Tuple;
 

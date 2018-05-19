@@ -3,6 +3,9 @@
 
 #include <assert.h>
 
+/*
+    this project test cast operator
+*/
 int main()
 {
     CastOperator<float> co(1.2f);

@@ -1,8 +1,5 @@
 #pragma once
 
-/*
-    this class test std::function
-*/
 template<typename T>
 class Function;
 

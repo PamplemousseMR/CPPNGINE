@@ -2,11 +2,6 @@
 
 #include <string>
 
-/*
-	this class cast operator
-
-	cast operator
-*/
 template<typename T>
 class CastOperator
 {

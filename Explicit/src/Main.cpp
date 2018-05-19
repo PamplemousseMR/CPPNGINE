@@ -2,6 +2,9 @@
 
 #include <assert.h>
 
+/*
+    this project test explicit keyword
+*/
 int main()
 {
     NotExplicit a1 = 1;      // OK: copy-initialization selects A::A(int)

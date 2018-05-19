@@ -4,11 +4,6 @@
 #include <initializer_list>
 #include <stdint.h>
 
-/*
-	This class test std::initializer_list
-
-	Constructor call with {} instead of ()
-*/
 class InitializationLists
 {
 

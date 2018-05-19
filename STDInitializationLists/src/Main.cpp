@@ -2,6 +2,9 @@
 
 #include <assert.h>
 
+/*
+    this project test std::initializer_list<> implementation
+*/
 int main()
 {
 	{
