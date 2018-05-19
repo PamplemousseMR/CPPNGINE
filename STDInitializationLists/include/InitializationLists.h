@@ -1,27 +1,22 @@
 #pragma once
 
-#include "Commun.h"
-
 #include <vector>
 #include <initializer_list>
+#include <stdint.h>
 
 /*
 	This class test std::initializer_list
 
 	Constructor call with {} instead of ()
 */
-class InitializationLists : public Commun
+class InitializationLists
 {
 
 public:
 
-	static void launchTest();
+    InitializationLists(int);
 
-private:
-
-	InitializationLists(int);
-
-	InitializationLists(std::initializer_list<int>);
+    InitializationLists( std::initializer_list< int > );
 
 	bool isList() const;
 
@@ -31,6 +26,6 @@ private:
 
 	std::vector<int> m_list{};
 
-	int m_size = 0;
+    size_t m_size = 0;
 
 };

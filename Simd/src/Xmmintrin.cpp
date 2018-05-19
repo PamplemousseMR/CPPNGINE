@@ -1,5 +1,7 @@
 #include "Simd.h"
+
 #include <xmmintrin.h>
+#include <iostream>
 
 /*  xmmintrin
 SSE
@@ -7,10 +9,9 @@ Introduce eight/sixteen 128 bit registers (XMM0-XMM7/15) and instruction to work
 Add integer operations on MMX registers too.
 The MMX-integer part of SSE is sometimes called MMXEXT, and was implemented on a few non-Intel CPUs without xmm registers and the floating point part of SSE.
 */
-void Simd::xmmintrin()
+void xmmintrin()
 {
 	float aligned32 arrFloat4[4];
-	char aligned32 arrChar4[4];
 	__m128 m128a, m128b;
 	__m64 m64;
 	const float cf = 10.5f;
@@ -18,6 +19,12 @@ void Simd::xmmintrin()
 	float flo = 10.5f;
 	int in = 10;
 	unsigned ui = 10;
+#ifdef _M_X64
+    __int64 i64;
+#endif
+#ifdef _M_X86
+    char aligned32 arrChar4[4];
+#endif
 
 	/*
 	* memory & initialization
@@ -119,7 +126,7 @@ void Simd::xmmintrin()
 	*/
 	in = _mm_cvt_ss2si(m128a);										// r = (int)a0
 	in = _mm_cvtt_ss2si(m128a);										// r = (int)a0
-	m128a = _mm_cvt_si2ss(m128a, in);								// r0 = (float)b, r1 = a1, r2 = a2, r3 = a3
+    m128a = _mm_cvt_si2ss(m128a, in);								// r0 = (float)b, r1 = a1, r2 = a2, r3 = a3
 	flo = _mm_cvtss_f32(m128a);										// r = a0
 
 	/*
@@ -128,12 +135,12 @@ void Simd::xmmintrin()
 	m128a = _mm_shuffle_ps(m128a, m128b, _MM_SHUFFLE(1, 2, 3, 4));  // r[0]=a[lo0], r[1] = a[lo1], r[2] = b[hi2], r[3] = b[hi3]
 	m128a = _mm_unpackhi_ps(m128a, m128b);                          // r0 = a2, r1 = b2, r2 = a3, r3 = b3
 	m128a = _mm_unpacklo_ps(m128a, m128b);                          // r0 = a0, r1 = b0, r2 = a1, r3 = b1
-	m128a = _mm_loadh_pi(m128a, &m64);								// r0 = a0, r1 = a1, r2 = *p0, r3 = *p1
+    m128a = _mm_loadh_pi(m128a, &m64);								// r0 = a0, r1 = a1, r2 = *p0, r3 = *p1
 	m128a = _mm_movehl_ps(m128a, m128b);                            // r0 = b2, r1 = b3, r2 = a2, r3 = a3
 	m128a = _mm_movelh_ps(m128a, m128b);                            // r0 = a0, r1 = a1, r2 = b0, r3 = b1
-	_mm_storeh_pi(&m64, m128a);										// *p0 = a2, *p1 = a3
-	m128a = _mm_loadl_pi(m128a, &m64);								// r0 = *p0, r1 = *p1, r2 = a2, r3 = a3
-	_mm_storel_pi(&m64, m128a);										// *p0 := b0, *p1 : = b1
+    _mm_storeh_pi(&m64, m128a);										// *p0 = a2, *p1 = a3
+    m128a = _mm_loadl_pi(m128a, &m64);								// r0 = *p0, r1 = *p1, r2 = a2, r3 = a3
+    _mm_storel_pi(&m64, m128a);										// *p0 := b0, *p1 : = b1
 	in = _mm_movemask_ps(m128a);									// r = sign(a3)<<3 | sign(a2)<<2 | sign(a1)<<1 | sign(a0)
 
 	/*
@@ -141,9 +148,9 @@ void Simd::xmmintrin()
 	*/
 	in = _mm_cvtss_si32(m128a);										// r = (int)a0
 	in = _mm_cvttss_si32(m128a);									// r = (int)a0
-	m128a = _mm_cvtsi32_ss(m128a, in);								// r0 = (float)b, r1 = a1, r2 = a2, r3 = a3
-	m128a = _mm_set1_ps(1.5f);										// r0 = r1 = r2 = r3 = w
-	m128a = _mm_load1_ps(&cf);										// r0 = *p, r1 = *p, r2 = *p, r3 = *p
+	//m128a = _mm_cvtsi32_ss(m128a, in);								// r0 = (float)b, r1 = a1, r2 = a2, r3 = a3
+	//m128a = _mm_set1_ps(1.5f);										// r0 = r1 = r2 = r3 = w
+	//m128a = _mm_load1_ps(&cf);										// r0 = *p, r1 = *p, r2 = *p, r3 = *p
 	_mm_store1_ps(arrFloat4, m128a);								// p[0] = a0 p[1] = a0, p[2] = a0, p[3] = a0
 
 	// X64 only

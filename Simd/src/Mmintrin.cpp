@@ -5,13 +5,13 @@
 MMX
 Introduce eight 64 bit registers(MM0 - MM7) and instructions to work with eight signed / unsigned bytes, four signed / unsigned words, two signed / unsigned dwords.
 */
-void Simd::mmintrin()
+void mmintrin()
 {
-	__m64 m64;
-	int in = 10;
-
 	// x86 only
 #ifdef _M_IX86
+    __m64 m64;
+    int in = 10;
+
 	/* 
 	* General support intrinsics 
 	*/

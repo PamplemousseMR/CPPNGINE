@@ -1,16 +1,12 @@
 #pragma once
 
-#include "Commun.h"
-
 #ifdef __unix__
-#define aligned32 __attribute__ ((aligned(16)))
+#define aligned32 __attribute__ ((aligned(32)))
 #else
-#define aligned32 _declspec(align(16))
+#define aligned32 _declspec(align(32))
 #endif
 
 /*
-	this class test simd
-
 	<mmintrin.h>  MMX       Introduce eight 64 bit registers (MM0-MM7) and instructions to work with eight signed/unsigned bytes, four signed/unsigned words, two signed/unsigned dwords.
 	<xmmintrin.h> SSE       Introduce eight/sixteen 128 bit registers (XMM0-XMM7/15) and instruction to work with four single precision floating point operands. Add integer operations on MMX registers too. (The MMX-integer part of SSE is sometimes called MMXEXT, and was implemented on a few non-Intel CPUs without xmm registers and the floating point part of SSE.)
 	<emmintrin.h> SSE2      Introduces instruction to work with 2 double precision floating point operands, and with packed byte/word/dword/qword integers in 128-bit xmm registers.
@@ -26,18 +22,6 @@
 	<zmmintrin.h> AVX512    Add eight/thirty-two 512 bit registers (ZMM0-ZMM7/31) and eight 64-bit mask register (k0-k7). Promote most previous instruction to 512 bit wide. Optional parts of AVX512 add instruction for exponentials & reciprocals (AVX512ER), scatter/gather prefetching (AVX512PF), scatter conflict detection (AVX512CD), compress, expand.
 	https://software.intel.com/sites/landingpage/IntrinsicsGuide
 */
-class Simd : public Commun
-{
 
-public:
-
-	static void launchTest();
-
-private:
-
-	void mmintrin();
-
-	void xmmintrin();
-
-
-};
+void mmintrin();
+void xmmintrin();
