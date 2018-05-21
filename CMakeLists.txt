@@ -21,7 +21,7 @@ ENDFUNCTION()
 
 #------------ cmake variables ------------
 IF(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
-    SET(CMAKE_CXX_FLAGS "-std=c++11")
+    SET(CMAKE_CXX_FLAGS "-std=c++11 -msse")
 ENDIF()
 
 #------------ create project ------------

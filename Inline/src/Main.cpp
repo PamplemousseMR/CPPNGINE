@@ -7,7 +7,7 @@
 */
 int main()
 {
-    assert(abs(-1) == 1);
+    assert(inlineAbs(-1) == 1);
 
     return 0;
 }
