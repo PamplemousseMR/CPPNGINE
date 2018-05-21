@@ -1,7 +1,6 @@
 #include "Simd.h"
 
 #include <xmmintrin.h>
-#include <iostream>
 
 /*  xmmintrin
 SSE
