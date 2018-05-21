@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <initializer_list>
-#include <stdint.h>
+#include <stddef.h>
 
 class InitializationLists
 {
