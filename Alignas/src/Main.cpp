@@ -5,7 +5,7 @@
 /*
     this project test alignas keyword, _declspec(align(x)), __attribute__ (aligned(x))
 
-    alignment is based on the size of maximum member of the struct, but it could be change
+    alignment is based on the size of maximum member of the struct, but it could be changed
     by alignas
 */
 int main()
