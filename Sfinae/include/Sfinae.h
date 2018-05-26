@@ -31,6 +31,27 @@ public:
 
 };
 
+template<typename O, typename T>
+class HasStreamOperatorDecltype
+{
+
+public:
+
+    template<typename Out, typename Type>
+    static constexpr auto hasStreamOperatorDecltype() -> decltype(std::declval<Out>() << std::declval<Type>(), bool())
+    {
+        return true;
+    }
+
+    static constexpr bool hasStreamOperatorDecltype(...)
+    {
+        return false;
+    }
+
+    static const bool value = hasStreamOperatorDecltype<O, T>();
+
+};
+
 template<bool C>
 struct enable_if
 {
