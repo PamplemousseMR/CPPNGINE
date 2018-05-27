@@ -9,10 +9,12 @@
 */
 int main()
 {
-    assert( (HasStreamOperator<std::ostream, std::string>::value) );
-    assert( !(HasStreamOperator<std::ostream, __m128>::value) );
-    assert( (HasStreamOperatorDecltype<std::ostream, std::string>::value) );
-    assert( !(HasStreamOperatorDecltype<std::ostream, __m128>::value) );
+    assert( (HasStreamOperatorPtr<std::ostream, std::string>::value) );
+    assert( !(HasStreamOperatorPtr<std::ostream, __m128>::value) );
+    assert( (HasStreamOperatorDecltypePtr<std::ostream, std::string>::value) );
+    assert( !(HasStreamOperatorDecltypePtr<std::ostream, __m128>::value) );
+    assert( (HasStreamOperatorDecltypeDeclvalPtr<std::ostream, std::string>::value) );
+    assert( !(HasStreamOperatorDecltypeDeclvalPtr<std::ostream, __m128>::value) );
 
     __m128 a;
     assert(CanPrint::print("test"));

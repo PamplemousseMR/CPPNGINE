@@ -3,7 +3,7 @@
 #include <ostream>
 
 template<typename O, typename T>
-class HasStreamOperator
+class HasStreamOperatorPtr
 {
 
 private:
@@ -19,36 +19,65 @@ private:
     {
     };
 
+private:
+
+    template<typename Out, typename Type>
+    static yes& hasStreamOperatorPtr(TemplateEvaluator<sizeof(*(Out*)nullptr << *(Type*)nullptr)>* templateEvaluator = nullptr);
+
+    template<typename Out, typename Type>
+    static no& hasStreamOperatorPtr(...);
+
 public:
 
-    template<typename Out, typename Type>
-    static yes& hasStreamOperator(TemplateEvaluator<sizeof(*(Out*)nullptr << *(Type*)nullptr)>* templateEvaluator = nullptr);
-
-    template<typename Out, typename Type>
-    static no& hasStreamOperator(...);
-
-    static const bool value = sizeof(hasStreamOperator<O, T>(nullptr)) == sizeof(yes);
+    static const bool value = sizeof(hasStreamOperatorPtr<O, T>(nullptr)) == sizeof(yes);
 
 };
 
 template<typename O, typename T>
-class HasStreamOperatorDecltype
+class HasStreamOperatorDecltypePtr
 {
 
-public:
+private:
 
     template<typename Out, typename Type>
-    static constexpr auto hasStreamOperatorDecltype() -> decltype(std::declval<Out>() << std::declval<Type>(), bool())
+	static constexpr auto hasStreamOperatorDecltypePtr(void*) -> decltype(*(Out*)nullptr << *(Type*)nullptr, bool())
     {
         return true;
     }
 
-    static constexpr bool hasStreamOperatorDecltype(...)
+    template<typename Out, typename Type>
+    static constexpr bool hasStreamOperatorDecltypePtr(...)
     {
         return false;
     }
 
-    static const bool value = hasStreamOperatorDecltype<O, T>();
+public:
+
+	static const bool value = hasStreamOperatorDecltypePtr<O, T>(nullptr);
+
+};
+
+template<typename O, typename T>
+class HasStreamOperatorDecltypeDeclvalPtr
+{
+
+private:
+
+    template<typename Out, typename Type>
+	static constexpr auto hasStreamOperatorDecltypeDeclvalPtr(void*) -> decltype(*std::declval<Out*>() << *std::declval<Type*>(), bool())
+    {
+        return true;
+    }
+
+    template<typename Out, typename Type>
+    static constexpr bool hasStreamOperatorDecltypeDeclvalPtr(...)
+    {
+        return false;
+    }
+
+public:
+
+	static const bool value = hasStreamOperatorDecltypeDeclvalPtr<O, T>(nullptr);
 
 };
 
@@ -69,13 +98,13 @@ class CanPrint
 public:
 
     template<typename U>
-    static bool print(const U& _obj, typename enable_if<HasStreamOperator<std::ostream, U>::value>::type* = nullptr)
+    static bool print(const U& _obj, typename enable_if<HasStreamOperatorPtr<std::ostream, U>::value>::type* = nullptr)
     {
         return true;
     }
 
     template<typename U>
-    static bool print(const U&, typename enable_if<!HasStreamOperator<std::ostream, U>::value>::type* = nullptr)
+    static bool print(const U&, typename enable_if<!HasStreamOperatorPtr<std::ostream, U>::value>::type* = nullptr)
     {
         return false;
     }
