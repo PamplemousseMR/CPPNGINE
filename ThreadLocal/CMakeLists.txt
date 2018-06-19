@@ -1,7 +1,5 @@
 cppngineTest()
 
-FIND_PACKAGE("Threads")
+FIND_PACKAGE("Threads" QUIET)
 
-GET_FILENAME_COMPONENT(cppngine_current_name ${CMAKE_CURRENT_SOURCE_DIR} NAME)
-
-TARGET_LINK_LIBRARIES(${cppngine_current_name} ${CMAKE_THREAD_LIBS_INIT})
+LINK_LIBRARIES(${cppngine_current_name} PRIVATE ${CMAKE_THREAD_LIBS_INIT})
