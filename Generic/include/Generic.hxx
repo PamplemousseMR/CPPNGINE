@@ -1,4 +1,4 @@
-#include "Generic.h"
+#include "Generic.hpp"
 
 #define printf_dec_format(x) _Generic((x), \
     char: "%c", \

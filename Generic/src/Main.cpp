@@ -1,4 +1,4 @@
-#include "Generic.h"
+#include "Generic.hpp"
 #include "Generic.hxx"
 
 #include <assert.h>

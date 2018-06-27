@@ -1,4 +1,4 @@
-#include "Inline.h"
+#include "Inline.hpp"
 
 #include <assert.h>
 

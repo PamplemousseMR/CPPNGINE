@@ -1,4 +1,4 @@
-#include "Sfinae.h"
+#include "Sfinae.hpp"
 
 #include <assert.h>
 #include <string>

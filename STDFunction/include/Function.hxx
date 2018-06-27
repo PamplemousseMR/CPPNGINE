@@ -1,4 +1,4 @@
-#include "Function.h"
+#include "Function.hpp"
 
 template<class F, class... A>
 Function< F(A...) >::Function(F(*_fun)(A...))
