@@ -8,21 +8,24 @@ SET(cppngine_src_dir "src")
 SET(cppngine_header_dir "include")
 
 FUNCTION(cppngineTest)
+    SET(cppngine_oneValueArgs NAME)
+    CMAKE_PARSE_ARGUMENTS(VAR "" ${cppngine_oneValueArgs} "" ${ARGN})
+
     #------ find files ------
     FILE(GLOB_RECURSE cppngine_src_files ${cppngine_src_dir}/*)
     FILE(GLOB_RECURSE cppngine_header_files ${cppngine_header_dir}/*)
 
     #------ create project ------
     GET_FILENAME_COMPONENT(cppngine_current_name ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+    SET(cppngine_current_name ${cppngine_current_name} PARENT_SCOPE)
+    SET(${VAR_NAME} ${cppngine_current_name} PARENT_SCOPE)
 
-    INCLUDE_DIRECTORIES(${cppngine_header_dir})
     ADD_EXECUTABLE(${cppngine_current_name} ${cppngine_src_files} ${cppngine_header_files})
+    TARGET_INCLUDE_DIRECTORIES(${cppngine_current_name} PRIVATE ${cppngine_header_dir})
 ENDFUNCTION()
 
 #------------ cmake variables ------------
-IF(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
-    SET(CMAKE_CXX_FLAGS "-std=c++11 ")
-ENDIF()
+SET(CMAKE_CXX_STANDARD 14)
 
 #------------ create project ------------
 
@@ -30,14 +33,14 @@ ENDIF()
 SET(cppngine_project_dir "")
 
 FILE(GLOB cppngine_glob_dir ./*)
-FOREACH(dir ${cppngine_glob_dir})
-    IF((IS_DIRECTORY ${dir}) AND (NOT ${dir} MATCHES ".*git"))
-        LIST(APPEND cppngine_project_dir ${dir})
+FOREACH(cppngine_dir ${cppngine_glob_dir})
+    IF((IS_DIRECTORY ${cppngine_dir}) AND (NOT ${cppngine_dir} MATCHES ".*git"))
+        LIST(APPEND cppngine_project_dir ${cppngine_dir})
     ENDIF()
 ENDFOREACH()
 
 #------ generate project for each sub directories ------
-FOREACH(dir ${cppngine_project_dir})
-    MESSAGE(INFO " generate project : " ${dir})
-    ADD_SUBDIRECTORY(${dir})
+FOREACH(cppngine_dir ${cppngine_project_dir})
+    MESSAGE(INFO " generate project : " ${cppngine_dir})
+    ADD_SUBDIRECTORY(${cppngine_dir})
 ENDFOREACH()
