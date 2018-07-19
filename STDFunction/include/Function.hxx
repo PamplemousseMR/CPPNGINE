@@ -4,6 +4,7 @@ template<class F, class... A>
 Function< F(A...) >::Function(F(*_fun)(A...))
 	:	m_fun(_fun)
 {
+    m_arity = sizeof...(A);
 }
 
 template<class F, class... A>

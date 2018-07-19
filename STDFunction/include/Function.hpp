@@ -13,6 +13,8 @@ public:
 
     R operator() (A... _args);
 
+    int m_arity;
+
 private:
 
     R(*m_fun)(A...);

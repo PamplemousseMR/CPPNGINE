@@ -54,6 +54,26 @@ TEMPLATE TemplateClass< int >::getTemplate() const noexcept
     return SPECIALIZED;
 }
 
+template< typename T >
+TemplateClass< std::vector< T > >::TemplateClass() noexcept
+{
+}
+
+template< typename T >
+TEMPLATE TemplateClass< std::vector< T > >::getTemplate() const noexcept
+{
+    return CHANGE;
+}
+
+TemplateClass< std::vector< int > >::TemplateClass() noexcept
+{
+}
+
+TEMPLATE TemplateClass< std::vector< int > >::getTemplate() const noexcept
+{
+    return CHANGESPE;
+}
+
 template< typename T, typename U >
 MultiTemplateClass< T, U >::MultiTemplateClass() noexcept
 {
@@ -83,4 +103,15 @@ template< typename T >
 TEMPLATE MultiTemplateClass< T, int >::getTemplate() const noexcept
 {
     return PARCIAL;
+}
+
+template< typename T, typename U >
+MultiTemplateClass< T, std::vector< U > >::MultiTemplateClass() noexcept
+{
+}
+
+template< typename T, typename U >
+TEMPLATE MultiTemplateClass< T, std::vector< U > >::getTemplate() const noexcept
+{
+    return CHANGE;
 }

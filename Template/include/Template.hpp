@@ -1,10 +1,14 @@
 #pragma once
 
+#include <vector>
+
 enum TEMPLATE
 {
     STANDARD,
     SPECIALIZED,
-    PARCIAL
+    PARCIAL,
+    CHANGE,
+    CHANGESPE
 };
 
 class TemplateMethod
@@ -55,6 +59,30 @@ public:
 
 };
 
+template< typename T >
+class TemplateClass< std::vector< T > >
+{
+
+public:
+
+    TemplateClass() noexcept;
+
+    TEMPLATE getTemplate() const noexcept;
+
+};
+
+template<>
+class TemplateClass< std::vector< int > >
+{
+
+public:
+
+    TemplateClass() noexcept;
+
+    TEMPLATE getTemplate() const noexcept;
+
+};
+
 template< typename T, typename U >
 class MultiTemplateClass
 {
@@ -81,6 +109,18 @@ public:
 
 template< typename T >
 class MultiTemplateClass< T, int >
+{
+
+public:
+
+    MultiTemplateClass() noexcept;
+
+    TEMPLATE getTemplate() const noexcept;
+
+};
+
+template< typename T, typename U >
+class MultiTemplateClass< T, std::vector< U > >
 {
 
 public:

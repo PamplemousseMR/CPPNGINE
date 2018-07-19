@@ -12,6 +12,7 @@ int main()
         return _i + _f;
     });
     assert(t(1, 3.f) == 4.);
+    assert(t.m_arity == 2);
 
 	return 0;
 }

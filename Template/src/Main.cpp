@@ -22,6 +22,12 @@ int main()
     TemplateClass< int > tempClassSpe;
     assert(SPECIALIZED == tempClassSpe.getTemplate());
 
+    TemplateClass< std::vector< void > > tempClassChange;
+    assert(CHANGE == tempClassChange.getTemplate());
+
+    TemplateClass< std::vector< int > > tempClassChangeSpe;
+    assert(CHANGESPE == tempClassChangeSpe.getTemplate());
+
     MultiTemplateClass< void, void > multiTempClass;
     assert(STANDARD == multiTempClass.getTemplate());
 
@@ -30,6 +36,9 @@ int main()
 
     MultiTemplateClass< void, int > multiTempClassPars;
     assert(PARCIAL == multiTempClassPars.getTemplate());
+
+    MultiTemplateClass< void, std::vector< void > > multiTempClassChange;
+    assert(CHANGE == multiTempClassChange.getTemplate());
 
 	return 0;
 }
