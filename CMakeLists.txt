@@ -34,7 +34,7 @@ SET(cppngine_project_dir "")
 
 FILE(GLOB cppngine_glob_dir ./*)
 FOREACH(cppngine_dir ${cppngine_glob_dir})
-    IF((IS_DIRECTORY ${cppngine_dir}) AND (NOT ${cppngine_dir} MATCHES ".*git"))
+    IF((IS_DIRECTORY ${cppngine_dir}) AND (NOT ${cppngine_dir} MATCHES ".*git")  AND (NOT ${cppngine_dir} MATCHES ".travis.yml"))
         LIST(APPEND cppngine_project_dir ${cppngine_dir})
     ENDIF()
 ENDFOREACH()

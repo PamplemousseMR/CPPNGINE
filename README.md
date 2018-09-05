@@ -2,6 +2,10 @@
 
 C++ sandbox.
 
+## Travis
+
+[![Build Status](https://travis-ci.com/PamplemousseMR/CPPNGINE.svg?branch=master)](https://travis-ci.com/PamplemousseMR/CPPNGINE)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
