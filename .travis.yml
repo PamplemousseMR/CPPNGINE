@@ -454,28 +454,10 @@ before_install:
   - eval
 
 before_script:
-  - cd ${HOME}
+  - cd ${TRAVIS_BUILD_DIR}/..  
   - mkdir build
   - cd build
   - cmake ${TRAVIS_BUILD_DIR} -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_CC_COMPILER=${CC}
 
 script:
   - make
-
-after_script:
-  - Alignas/Alignas
-  - CastOperator/CastOperator
-  - Decltype/Decltype
-  - Explicit/Explicit
-  - Generic/Generic
-  - Inline/Inline
-  - MoveSemantics/MoveSemantics
-  - Mutable/Mutable
-  - Sfinae/Sfinae
-  - Simd/Simd
-  - STDFunction/STDFunction
-  - STDInitializationLists/STDInitializationLists
-  - STDTuple/STDTuple
-  - Template/Template
-  - ThreadLocal/ThreadLocal
-  - VirtualInheritance/VirtualInheritance
