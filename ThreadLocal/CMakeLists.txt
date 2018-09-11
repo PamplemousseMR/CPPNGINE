@@ -1,5 +1,9 @@
-cppngineTest(NAME cppngine_project_name)
+IF((NOT APPLE) OR (APPLE AND (XCODE_VERSION VERSION_GREATER 7.3.0)) )
 
-FIND_PACKAGE("Threads" QUIET)
+    cppngineTest(NAME cppngine_project_name)
 
-TARGET_LINK_LIBRARIES(${cppngine_project_name} ${CMAKE_THREAD_LIBS_INIT})
+    FIND_PACKAGE("Threads" QUIET)
+
+    TARGET_LINK_LIBRARIES(${cppngine_project_name} ${CMAKE_THREAD_LIBS_INIT})
+
+ENDIF()
