@@ -22,7 +22,7 @@ private:
 private:
 
     template<typename Out, typename Type>
-    static yes& hasStreamOperatorPtr(TemplateEvaluator<sizeof(*(Out*)nullptr << *(Type*)nullptr)>* templateEvaluator = nullptr);
+    static yes& hasStreamOperatorPtr(TemplateEvaluator<sizeof(*static_cast<Out*>(nullptr) << *static_cast<Type*>(nullptr))>* templateEvaluator = nullptr);
 
     template<typename Out, typename Type>
     static no& hasStreamOperatorPtr(...);
@@ -40,7 +40,7 @@ class HasStreamOperatorDecltypePtr
 private:
 
     template<typename Out, typename Type>
-	static constexpr auto hasStreamOperatorDecltypePtr(void*) -> decltype(*(Out*)nullptr << *(Type*)nullptr, bool())
+    static constexpr auto hasStreamOperatorDecltypePtr(void*) -> decltype(*static_cast<Out*>(nullptr) << *static_cast<Type*>(nullptr), bool())
     {
         return true;
     }
@@ -64,7 +64,7 @@ class HasStreamOperatorDecltypeDeclvalPtr
 private:
 
     template<typename Out, typename Type>
-	static constexpr auto hasStreamOperatorDecltypeDeclvalPtr(void*) -> decltype(*std::declval<Out*>() << *std::declval<Type*>(), bool())
+    static constexpr auto hasStreamOperatorDecltypeDeclvalPtr(void*) -> decltype(std::declval<Out>() << std::declval<Type>(), bool())
     {
         return true;
     }
@@ -98,7 +98,7 @@ class CanPrint
 public:
 
     template<typename U>
-    static bool print(const U& _obj, typename enable_if<HasStreamOperatorPtr<std::ostream, U>::value>::type* = nullptr)
+    static bool print(const U&, typename enable_if<HasStreamOperatorPtr<std::ostream, U>::value>::type* = nullptr)
     {
         return true;
     }
