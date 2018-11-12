@@ -23,6 +23,7 @@ int main()
 {
 	mmintrin();
 	xmmintrin();
+    emmintrin();
 
 	return 0;
 }

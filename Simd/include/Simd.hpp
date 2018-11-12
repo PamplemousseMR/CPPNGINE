@@ -2,3 +2,4 @@
 
 void mmintrin();
 void xmmintrin();
+void emmintrin();

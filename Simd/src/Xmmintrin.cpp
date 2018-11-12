@@ -100,18 +100,18 @@ void xmmintrin()
     m128a = _mm_cmpord_ps(m128a, m128b);							// r0 = (a0 ord? b0) ? 0xffffffff : 0x0, r1 = (a1 ord? b1) ? 0xffffffff : 0x0, r2 = (a2 ord? b2) ? 0xffffffff : 0x0, r3 = (a3 ord? b3) ? 0xffffffff : 0x0
     m128a = _mm_cmpunord_ss(m128a, m128b);							// r0 = (a0 unord? b0) ? 0xffffffff : 0x0, r1 = a1, r2 = a2, r3 = a3
     m128a = _mm_cmpunord_ps(m128a, m128b);							// r0 = (a0 unord? b0) ? 0xffffffff : 0x0, r1 = (a1 unord? b1) ? 0xffffffff : 0x0, r2 = (a2 unord? b2) ? 0xffffffff : 0x0, r3 = (a3 unord? b3) ? 0xffffffff : 0x0
-    in = _mm_comieq_ss(m128a, m128b);								// r0 = (a0 == b0) ? 0x1 : 0x0, r1 = a1, r2 = a2, r3 = a3
-    in = _mm_comilt_ss(m128a, m128b);								// r0 = (a0 < b0) ? 0x1 : 0x0, r1 = a1, r2 = a2, r3 = a3
-    in = _mm_comile_ss(m128a, m128b);								// r0 = (a0 <= b0) ? 0x1 : 0x0, r1 = a1, r2 = a2, r3 = a3
-    in = _mm_comigt_ss(m128a, m128b);								// r0 = (a0 > b0) ? 0x1 : 0x0, r1 = a1, r2 = a2, r3 = a3
-    in = _mm_comige_ss(m128a, m128b);								// r0 = (a0 >= b0) ? 0x1 : 0x0, r1 = a1, r2 = a2, r3 = a3
-    in = _mm_comineq_ss(m128a, m128b);								// r0 = (a0 != b0) ? 0x1 : 0x0, r1 = a1, r2 = a2, r3 = a3
-    in = _mm_ucomieq_ss(m128a, m128b);								// r0 = (a0 == b0) ? 0x1 : 0x0, r1 = a1, r2 = a2, r3 = a3
-    in = _mm_ucomilt_ss(m128a, m128b);								// r0 = (a0 < b0) ? 0x1 : 0x0, r1 = a1, r2 = a2, r3 = a3
-    in = _mm_ucomile_ss(m128a, m128b);								// r0 = (a0 <= b0) ? 0x1 : 0x0, r1 = a1, r2 = a2, r3 = a3
-    in = _mm_ucomigt_ss(m128a, m128b);								// r0 = (a0 > b0) ? 0x1 : 0x0, r1 = a1, r2 = a2, r3 = a3
-    in = _mm_ucomige_ss(m128a, m128b);								// r0 = (a0 >= b0) ? 0x1 : 0x0, r1 = a1, r2 = a2, r3 = a3
-    in = _mm_ucomineq_ss(m128a, m128b);								// r0 = (a0 != b0) ? 0x1 : 0x0, r1 = a1, r2 = a2, r3 = a3
+    in = _mm_comieq_ss(m128a, m128b);                               // r = (a0 == b0) ? 0x1 : 0x0
+    in = _mm_comilt_ss(m128a, m128b);                               // r = (a0 < b0) ? 0x1 : 0x0
+    in = _mm_comile_ss(m128a, m128b);                               // r = (a0 <= b0) ? 0x1 : 0x0
+    in = _mm_comigt_ss(m128a, m128b);                               // r = (a0 > b0) ? 0x1 : 0x0
+    in = _mm_comige_ss(m128a, m128b);                               // r = (a0 >= b0) ? 0x1 : 0x0
+    in = _mm_comineq_ss(m128a, m128b);                              // r = (a0 != b0) ? 0x1 : 0x0
+    in = _mm_ucomieq_ss(m128a, m128b);                              // r = (a0 == b0) ? 0x1 : 0x0
+    in = _mm_ucomilt_ss(m128a, m128b);                              // r = (a0 < b0) ? 0x1 : 0x0
+    in = _mm_ucomile_ss(m128a, m128b);                              // r = (a0 <= b0) ? 0x1 : 0x0
+    in = _mm_ucomigt_ss(m128a, m128b);                              // r = (a0 > b0) ? 0x1 : 0x0
+    in = _mm_ucomige_ss(m128a, m128b);                              // r = (a0 >= b0) ? 0x1 : 0x0
+    in = _mm_ucomineq_ss(m128a, m128b);                             // r = (a0 != b0) ? 0x1 : 0x0
 
     /*
     * conversions
@@ -142,7 +142,7 @@ void xmmintrin()
     in = _mm_cvttss_si32(m128a);									// r = (int)a0
     m128a = _mm_cvtsi32_ss(m128a, in);								// r0 = (float)b, r1 = a1, r2 = a2, r3 = a3
     m128a = _mm_set1_ps(1.5f);										// r0 = r1 = r2 = r3 = w
-    m128a = _mm_load1_ps(&arrFloat4[0]);										// r0 = *p, r1 = *p, r2 = *p, r3 = *p
+    m128a = _mm_load1_ps(&arrFloat4[0]);							// r0 = *p, r1 = *p, r2 = *p, r3 = *p
     _mm_store1_ps(arrFloat4, m128a);								// p[0] = a0 p[1] = a0, p[2] = a0, p[3] = a0
 
 #ifdef _M_X64
