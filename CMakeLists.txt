@@ -1,7 +1,7 @@
 #========================================
 #	project
 #========================================
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.7)
 PROJECT("CPPNGINE" CXX)
 
 #================================================================================
@@ -18,6 +18,11 @@ SET(cppngine_header_dir "include")
 #	compiler specifications
 #========================================
 SET(CMAKE_CXX_STANDARD 14)
+IF (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    IF((CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "3.8.0") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS_EQUAL "3.9.1"))
+        SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+    ENDIF()
+ENDIF()
 
 #================================================================================
 #		create
