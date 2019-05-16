@@ -11,6 +11,15 @@ matrix:
     #============================================================
     #==============================
     #
+    #          windows
+    #
+    #==============================
+
+    - os: windows
+      env: MATRIX_EVAL="BUILD_TYPE=Debug"
+
+    #==============================
+    #
     #          osx gcc
     #
     #==============================
@@ -196,6 +205,15 @@ matrix:
     #                         Release 
     #
     #============================================================
+    #==============================
+    #
+    #          windows
+    #
+    #==============================
+
+    - os: windows
+      env: MATRIX_EVAL="BUILD_TYPE=Release"
+
     #==============================
     #
     #          osx gcc
@@ -388,4 +406,4 @@ before_script:
   - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_CXX_COMPILER=${CXX} ${TRAVIS_BUILD_DIR} 
 
 script:
-  - make
+  - cmake --build .
