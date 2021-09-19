@@ -1,310 +1,124 @@
 version: 2.1
+
+commands:
+  install_dependencies:
+    parameters:
+      compilers:
+        type: string
+        default: ""
+    steps:
+      - run: 
+          name: Install dependencies
+          command: |
+            apt-get update
+            apt-get --assume-yes install cmake
+            apt-get --assume-yes install << parameters.compilers >>
+
+  build_project:
+    parameters:
+      compiler:
+        type: string
+        default: ""
+    steps:
+      - run: 
+          name: Build project with << parameters.compiler >>
+          command: |
+            export CXX=<< parameters.compiler >>
+            mkdir build_debug
+            mkdir build_release
+            cd build_debug
+            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
+            cmake --build .
+            cd ../build_release
+            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
+            cmake --build .
+
 jobs:
   Ubuntu-14-04:
     docker:
       - image: ubuntu:14.04
     steps:
       - checkout
-      - run: 
-          name: Install dependencies
-          command: |
-            apt-get update
-            apt-get --assume-yes install cmake
-            apt-get --assume-yes install g++-4.7 g++-4.8
-      - run:
-          name: Build project g++ 4.7
-          command: |
-            export CXX=g++-4.7
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
-      - run:
-          name: Build project g++ 4.8
-          command: |
-            export CXX=g++-4.8
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .            
+      - install_dependencies:
+          compilers: g++-4.7 g++-4.8
+      - build_project:
+          compiler: g++-4.7
+      - build_project:
+          compiler: g++-4.8
 
   Ubuntu-16-04:
     docker:
       - image: ubuntu:16.04
     steps:
       - checkout
-      - run: 
-          name: Install dependencies
-          command: |
-            apt-get update
-            apt-get --assume-yes install cmake
-            apt-get --assume-yes install g++-4.7 g++-4.8 g++-4.7 g++-4.9 g++-5
-      - run:
-          name: Build project g++ 4.7
-          command: |
-            export CXX=g++-4.7
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
-      - run:
-          name: Build project g++ 4.8
-          command: |
-            export CXX=g++-4.8
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
-      - run:
-          name: Build project g++ 4.9
-          command: |
-            export CXX=g++-4.9
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
-      - run:
-          name: Build project g++ 5
-          command: |
-            export CXX=g++-5
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
+      - install_dependencies:
+          compilers: g++-4.7 g++-4.8 g++-4.9 g++-5
+      - build_project:
+          compiler: g++-4.7
+      - build_project:
+          compiler: g++-4.8
+      - build_project:
+          compiler: g++-4.9
+      - build_project:
+          compiler: g++-5
 
   Ubuntu-18-04:
     docker:
       - image: ubuntu:18.04
     steps:
       - checkout
-      - run: 
-          name: Install dependencies
-          command: |
-            apt-get update
-            apt-get --assume-yes install cmake
-            apt-get --assume-yes install g++-4.8 g++-5 g++-6 g++-7 g++-8
-      - run:
-          name: Build project g++ 4.8
-          command: |
-            export CXX=g++-4.8
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
-      - run:
-          name: Build project g++ 5
-          command: |
-            export CXX=g++-5
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
-      - run:
-          name: Build project g++ 6
-          command: |
-            export CXX=g++-6
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
-      - run:
-          name: Build project g++ 7
-          command: |
-            export CXX=g++-7
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
-      - run:
-          name: Build project g++ 8
-          command: |
-            export CXX=g++-8
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
+      - install_dependencies:
+          compilers: g++-4.8 g++-5 g++-6 g++-7 g++-8
+      - build_project:
+          compiler: g++-4.8
+      - build_project:
+          compiler: g++-5
+      - build_project:
+          compiler: g++-6
+      - build_project:
+          compiler: g++-7
+      - build_project:
+          compiler: g++-8
 
   Ubuntu-20-04:
     docker:
       - image: ubuntu:20.04
     steps:
       - checkout
-      - run: 
-          name: Install dependencies
-          command: |
-            apt-get update
-            apt-get --assume-yes install cmake
-            apt-get --assume-yes install g++-7 g++-8 g++-9 g++-10
-      - run:
-          name: Build project g++ 7
-          command: |
-            export CXX=g++-7
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
-      - run:
-          name: Build project g++ 8
-          command: |
-            export CXX=g++-8
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
-      - run:
-          name: Build project g++ 9
-          command: |
-            export CXX=g++-9
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
-      - run:
-          name: Build project g++ 10
-          command: |
-            export CXX=g++-10
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
+      - install_dependencies:
+          compilers: g++-7 g++-8 g++-9 g++-10
+      - build_project:
+          compiler: g++-7
+      - build_project:
+          compiler: g++-8
+      - build_project:
+          compiler: g++-9
+      - build_project:
+          compiler: g++-10
 
   Ubuntu-21-04:
     docker:
       - image: ubuntu:21.04
     steps:
       - checkout
-      - run: 
-          name: Install dependencies
-          command: |
-            apt-get update
-            apt-get --assume-yes install cmake
-            apt-get --assume-yes install g++-7 g++-8 g++-9 g++-10 g++-11
-      - run:
-          name: Build project g++ 7
-          command: |
-            export CXX=g++-7
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
-      - run:
-          name: Build project g++ 8
-          command: |
-            export CXX=g++-8
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
-      - run:
-          name: Build project g++ 9
-          command: |
-            export CXX=g++-9
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
-      - run:
-          name: Build project g++ 10
-          command: |
-            export CXX=g++-10
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
-      - run:
-          name: Build project g++ 11
-          command: |
-            export CXX=g++-11
-            mkdir build_debug
-            mkdir build_release
-            cd build_debug
-            cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=${CXX} ..
-            cmake --build .
-            cd ../build_release
-            cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CXX} .. 
-            cmake --build .
+      - install_dependencies:
+          compilers: g++-7 g++-8 g++-9 g++-10 g++-11
+      - build_project:
+          compiler: g++-7
+      - build_project:
+          compiler: g++-8
+      - build_project:
+          compiler: g++-9
+      - build_project:
+          compiler: g++-10
+      - build_project:
+          compiler: g++-11
 
 workflows:
   version: 2
   workflow:
     jobs:
-      - Ubuntu-14-04
+      #- Ubuntu-14-04
       - Ubuntu-16-04
       - Ubuntu-18-04
       - Ubuntu-20-04
