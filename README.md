@@ -2,9 +2,9 @@
 
 C++ sandbox.
 
-## Travis
+## Circle-CI
 
-[![Build Status](https://travis-ci.com/PamplemousseMR/CPPNGINE.svg?branch=master)](https://travis-ci.com/PamplemousseMR/CPPNGINE)
+[![Build Status](https://circleci.com/gh/PamplemousseMR/CPPNGINE/tree/master.svg?style=svg)](https://circleci.com/gh/PamplemousseMR/CPPNGINE/tree/master)
 
 ## Getting Started
 
