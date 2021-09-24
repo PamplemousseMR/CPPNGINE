@@ -2,9 +2,9 @@
 
 C++ sandbox.
 
-## Circle-CI
+## CI
 
-[![Build Status](https://circleci.com/gh/PamplemousseMR/CPPNGINE/tree/master.svg?style=svg)](https://circleci.com/gh/PamplemousseMR/CPPNGINE/tree/master)
+![Build Status](https://github.com/PamplemousseMR/CPPNGINE/actions/workflows/build.yml/badge.svg)
 
 ## Getting Started
 

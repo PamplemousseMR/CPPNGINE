@@ -1,4 +1,4 @@
-#include "CastOperator.hpp"
+#include "castOperator.hpp"
 
 template<typename T>
 CastOperator<T>::CastOperator(const T& _ref)
